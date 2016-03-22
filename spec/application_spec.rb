@@ -2,7 +2,6 @@
 ENV['RACK_ENV'] = 'test'
 
 require 'application'
-require 'rspec'
 require 'rack/test'
 
 describe 'The Hello World App' do
