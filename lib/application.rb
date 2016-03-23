@@ -1,12 +1,13 @@
 
 require 'sinatra/base'
 require 'sinatra/json'
-require_relative 'topic_repository'
+require_relative 'context'
 
 class DoneMap < Sinatra::Base
-  def initialize
-    @topicRepository = TopicRepository.new
-    super
+
+  def initialize(app: nil, context: ::Context.new)
+    @context = context
+    super(app)
   end
 
   get '/' do
@@ -14,6 +15,7 @@ class DoneMap < Sinatra::Base
   end
 
   get '/topics' do
-    json @topicRepository.to_hash
+    json @context.topic_repository.to_hash
   end
+
 end
