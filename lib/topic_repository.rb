@@ -1,7 +1,7 @@
 
 class TopicRepository
-
-  def initialize(dynamodb_client:, table_name:, uuid_generator:, topic_data_converter:)
+  def initialize(dynamodb_client:, table_name:, uuid_generator:,
+                 topic_data_converter:)
     @dynamodb_client = dynamodb_client
     @table_name = table_name
     @uuid_generator = uuid_generator
@@ -9,7 +9,7 @@ class TopicRepository
   end
 
   def put(topic_data)
-    item = {'id' => @uuid_generator.generate}.merge(topic_data)
+    item = { 'id' => @uuid_generator.generate }.merge(topic_data)
     @dynamodb_client.put_item(
       table_name: @table_name,
       item: item
@@ -22,5 +22,4 @@ class TopicRepository
       @topic_data_converter.convert(topic)
     end
   end
-
 end

@@ -10,3 +10,5 @@ end
 task :lint do
   sh 'rubocop . --display-cop-names'
 end
+
+task prep: [:lint, :test]

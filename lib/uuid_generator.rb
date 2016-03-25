@@ -1,6 +1,5 @@
 
 class UuidGenerator
-
   def initialize(secure_random:)
     @secure_random = secure_random
   end
@@ -8,5 +7,4 @@ class UuidGenerator
   def generate
     @secure_random.uuid
   end
-
 end

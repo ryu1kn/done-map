@@ -4,7 +4,6 @@ require 'sinatra/json'
 require_relative 'context'
 
 class DoneMap < Sinatra::Base
-
   def initialize(app: nil, context: ::Context.new)
     @context = context
     super(app)
@@ -22,5 +21,4 @@ class DoneMap < Sinatra::Base
     data = JSON.parse request.body.read
     @context.topic_repository.put data
   end
-
 end

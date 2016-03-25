@@ -6,9 +6,8 @@ require_relative 'topic_data_converter'
 require_relative 'topic_repository'
 
 class Context
-
   def dynamodb_client
-    dynamodb = Aws::DynamoDB::Client.new(
+    Aws::DynamoDB::Client.new(
       region: ENV['AWS_REGION'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID'],
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
@@ -33,5 +32,4 @@ class Context
   def topic_data_converter
     TopicDataConverter.new
   end
-
 end
