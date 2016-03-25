@@ -6,10 +6,12 @@ describe 'TopicDataConverter' do
   it 'builds topic data' do
     topic_data_converter = TopicDataConverter.new
     expect = {
+      'id' => 'TOPIC_ID',
       'title' => 'TITLE',
       'total' => 240
     }
     actual = topic_data_converter.convert(
+      'id' => 'TOPIC_ID',
       'title' => 'TITLE',
       'total' => BigDecimal.new('240')
     )

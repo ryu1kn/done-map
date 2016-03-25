@@ -28,7 +28,7 @@ Open `localhost:3000` with your browser.
   }
   ```
   * Create one topic
-* `POST /topic/{topicId}/bands`
+* `POST /topic/{topic_id}/bands`
   ```
   [
     {"begin": 10, "end": 20},

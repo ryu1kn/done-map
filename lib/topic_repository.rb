@@ -16,6 +16,19 @@ class TopicRepository
     )
   end
 
+  def save_bands(topic_id, bands)
+    @dynamodb_client.update_item(
+      table_name: @table_name,
+      key: { 'id' => topic_id },
+      update_expression: 'SET bands = '\
+        'list_append(if_not_exists(bands, :empty_list), :new_bands)',
+      expression_attribute_values: {
+        ':new_bands' => bands,
+        ':empty_list' => []
+      }
+    )
+  end
+
   def to_hash
     topics = @dynamodb_client.scan(table_name: @table_name).items
     topics.map do |topic|
