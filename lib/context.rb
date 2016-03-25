@@ -1,5 +1,8 @@
 
 require 'aws-sdk'
+require 'securerandom'
+require_relative 'uuid_generator'
+require_relative 'topic_data_converter'
 require_relative 'topic_repository'
 
 class Context
@@ -15,8 +18,20 @@ class Context
   def topic_repository
     TopicRepository.new(
       dynamodb_client: dynamodb_client,
-      table_name: 'done-map-topics'
+      table_name: 'done-map-topics',
+      uuid_generator: uuid_generator,
+      topic_data_converter: topic_data_converter
     )
+  end
+
+  def uuid_generator
+    UuidGenerator.new(
+      secure_random: SecureRandom
+    )
+  end
+
+  def topic_data_converter
+    TopicDataConverter.new
   end
 
 end

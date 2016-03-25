@@ -18,4 +18,9 @@ class DoneMap < Sinatra::Base
     json @context.topic_repository.to_hash
   end
 
+  put '/topic' do
+    data = JSON.parse request.body.read
+    @context.topic_repository.put data
+  end
+
 end

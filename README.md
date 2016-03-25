@@ -20,8 +20,20 @@ Open `localhost:3000` with your browser.
 
 * `GET /topics`
   * Returns all topic information
+* `PUT /topic`
+  ```
+  {
+    "title": "TITLE",
+    "total": 240
+  }
+  ```
+  * Create one topic
 * `POST /topic/{topicId}/bands`
+  ```
+  [
+    {"begin": 10, "end": 20},
+    {"begin": 50, "end": 55},
+    ...
+  ]
+  ```
   * Register one or more bands to a specific topic. Payload should be like:
-  ```
-  [{"begin": 10, "end": 20}, {"begin": 50, "end": 55}, ...]
-  ```
