@@ -1,8 +1,18 @@
 
+input[type=number] {
+  width: 5em;
+}
+
+#band-register {
+  display: -webkit-box;
+  display: box;
+}
+
 .topic {
   border: 1px solid black;
   margin: 1em;
   display: -webkit-box;
+  display: box;
   height: 50px;
   line-height: 50px;
 }
@@ -22,6 +32,7 @@
 
 .topic__progress-bar {
   -webkit-box-flex: 1;
+  box-flex: 1;
   position: relative;
   margin: .5em;
   background-color: #eee;
