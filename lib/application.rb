@@ -10,7 +10,7 @@ class DoneMap < Sinatra::Base
   end
 
   get '/' do
-    'Hello world!'
+    send_file File.join(settings.public_folder, 'index.html')
   end
 
   get '/topics' do

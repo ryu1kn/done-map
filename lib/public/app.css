@@ -1,0 +1,37 @@
+
+.topic {
+  border: 1px solid black;
+  margin: 1em;
+  display: -webkit-box;
+  height: 50px;
+  line-height: 50px;
+}
+
+.topic__title {
+  padding-left: 1em;
+  width: 30%;
+  max-width: 13em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topic__progress-bar {
+  -webkit-box-flex: 1;
+  position: relative;
+  margin: .5em;
+  background-color: #eee;
+}
+
+.topic__progress-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: mediumseagreen;
+}
+
+.topic__progress-stat {
+  text-align: center;
+  font-size: 1.5em;
+  width: 10%;
+}
