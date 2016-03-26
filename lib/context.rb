@@ -7,11 +7,13 @@ require_relative 'topic_repository'
 
 class Context
   def dynamodb_client
-    Aws::DynamoDB::Client.new(
+    is_on_aws = ENV['AWS_REGION'].nil?
+    params = is_on_aws ? {} : {
       region: ENV['AWS_REGION'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID'],
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-    )
+    }
+    Aws::DynamoDB::Client.new params
   end
 
   def topic_repository
