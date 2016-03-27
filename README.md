@@ -1,7 +1,8 @@
 
 # done-map
 
-It's still just a hello-world sinatra app
+A web app to keep track of which part you've done on something.
+For example, you can record which pages/chapters you've read in a book.
 
 ## Prerequisite
 
@@ -36,4 +37,4 @@ Open `localhost:3000` with your browser.
     ...
   ]
   ```
-  * Register one or more bands to a specific topic. Payload should be like:
+  * Register one or more bands to a specific topic

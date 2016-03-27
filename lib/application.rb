@@ -4,6 +4,9 @@ require 'sinatra/json'
 require_relative 'context'
 
 class DoneMap < Sinatra::Base
+  set :root, File.dirname(__FILE__)
+  set :public_folder, proc { File.join(root, '..', 'public') }
+
   def initialize(app: nil, context: ::Context.new)
     @context = context
     super(app)
