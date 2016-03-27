@@ -2,13 +2,19 @@
   "name": "done-map-frontend",
   "version": "1.0.0",
   "description": "Frontend of done-map",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "build": "mkdir -p ../public && cp *.{html,js,css} ../public"
+    "prebuild": "npm install",
+    "build": "webpack && cp index.html dest"
   },
   "devDependencies": {
-    "eslint": "^2.5.1"
+    "css-loader": "^0.23.1",
+    "eslint": "^2.5.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.14"
+  },
+  "dependencies": {
+    "jquery": "^2.2.2"
   }
 }

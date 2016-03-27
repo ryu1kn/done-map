@@ -1,4 +1,6 @@
-/* globals $, location */
+/* globals location */
+require('./app.css');
+var $ = require('jquery');
 
 (function () {
     var topics = [];
