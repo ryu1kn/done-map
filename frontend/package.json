@@ -1,0 +1,14 @@
+{
+  "name": "done-map-frontend",
+  "version": "1.0.0",
+  "description": "Frontend of done-map",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "build": "mkdir -p ../public && cp *.{html,js,css} ../public"
+  },
+  "devDependencies": {
+    "eslint": "^2.5.1"
+  }
+}
