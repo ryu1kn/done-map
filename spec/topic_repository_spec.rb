@@ -27,20 +27,21 @@ describe 'topic_repository' do
     actual = topic_repository.to_hash
     expect(actual).to eq(
       [
-        { 'id' => 'TOPIC_ID_1',
-          'title' => 'TITLE1',
-          'total' => 240,
-          'bands' => []
+        {
+          id: 'TOPIC_ID_1',
+          title: 'TITLE1',
+          total: 240,
+          bands: []
         },
         {
-          'id' => 'TOPIC_ID_2',
-          'title' => 'TITLE2',
-          'total' => 320,
-          'bands' => []
+          id: 'TOPIC_ID_2',
+          title: 'TITLE2',
+          total: 320,
+          bands: []
         }
       ])
-    expect(actual[0]['total']).to be_a(Integer)
-    expect(actual[1]['total']).to be_a(Integer)
+    expect(actual[0][:total]).to be_a(Integer)
+    expect(actual[1][:total]).to be_a(Integer)
     expect(dynamodb_mock).to have_received(:scan).with(
       table_name: 'DONE-MAP-TOPICS'
     )

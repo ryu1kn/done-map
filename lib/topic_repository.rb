@@ -1,11 +1,10 @@
 
 class TopicRepository
-  def initialize(dynamodb_client:, table_name:, uuid_generator:,
-                 topic_data_converter:)
-    @dynamodb_client = dynamodb_client
-    @table_name = table_name
-    @uuid_generator = uuid_generator
-    @topic_data_converter = topic_data_converter
+  def initialize(params)
+    @dynamodb_client = params[:dynamodb_client]
+    @table_name = params[:table_name]
+    @uuid_generator = params[:uuid_generator]
+    @topic_data_converter = params[:topic_data_converter]
   end
 
   def put(topic_data)
@@ -20,7 +19,7 @@ class TopicRepository
     @dynamodb_client.update_item(
       table_name: @table_name,
       key: { 'id' => topic_id },
-      update_expression: 'SET bands = '\
+      update_expression: 'SET bands = ' \
         'list_append(if_not_exists(bands, :empty_list), :new_bands)',
       expression_attribute_values: {
         ':new_bands' => bands,
