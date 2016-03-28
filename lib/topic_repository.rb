@@ -8,7 +8,7 @@ class TopicRepository
   end
 
   def put(topic_data)
-    item = { 'id' => @uuid_generator.generate }.merge(topic_data)
+    item = { id: @uuid_generator.generate }.merge(topic_data)
     @dynamodb_client.put_item(
       table_name: @table_name,
       item: item
@@ -18,7 +18,7 @@ class TopicRepository
   def save_bands(topic_id, bands)
     @dynamodb_client.update_item(
       table_name: @table_name,
-      key: { 'id' => topic_id },
+      key: { id: topic_id },
       update_expression: 'SET bands = ' \
         'list_append(if_not_exists(bands, :empty_list), :new_bands)',
       expression_attribute_values: {

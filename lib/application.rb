@@ -21,12 +21,12 @@ class DoneMap < Sinatra::Base
   end
 
   put '/topic' do
-    data = JSON.parse request.body.read
+    data = JSON.parse(request.body.read, symbolize_names: true)
     @context.topic_repository.put data
   end
 
   post '/topic/:topic_id/bands' do
-    data = JSON.parse request.body.read
+    data = JSON.parse(request.body.read, symbolize_names: true)
     @context.topic_repository.save_bands params['topic_id'], data
   end
 end

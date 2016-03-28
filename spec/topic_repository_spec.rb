@@ -58,15 +58,15 @@ describe 'topic_repository' do
       topic_data_converter: TopicDataConverter.new
     )
     topic_repository.put(
-      'title' => 'TITLE',
-      'total' => 240
+      title: 'TITLE',
+      total: 240
     )
     expect(dynamodb_mock).to have_received(:put_item).with(
       table_name: 'DONE-MAP-TOPICS',
       item: {
-        'id' => 'UUID',
-        'title' => 'TITLE',
-        'total' => 240
+        id: 'UUID',
+        title: 'TITLE',
+        total: 240
       }
     )
   end
@@ -81,15 +81,15 @@ describe 'topic_repository' do
       topic_data_converter: nil
     )
     topic_id = 'TOPIC_ID'
-    bands = [{ 'begin' => 10, 'end' => 20 }]
+    bands = [{ begin: 10, end: 20 }]
     topic_repository.save_bands(topic_id, bands)
     expect(dynamodb_mock).to have_received(:update_item).with(
       table_name: 'DONE-MAP-TOPICS',
-      key: { 'id' => 'TOPIC_ID' },
+      key: { id: 'TOPIC_ID' },
       update_expression: 'SET bands = '\
         'list_append(if_not_exists(bands, :empty_list), :new_bands)',
       expression_attribute_values: {
-        ':new_bands' => [{ 'begin' => 10, 'end' => 20 }],
+        ':new_bands' => [{ begin: 10, end: 20 }],
         ':empty_list' => []
       }
     )
