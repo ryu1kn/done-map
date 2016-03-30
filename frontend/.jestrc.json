@@ -1,0 +1,8 @@
+{
+  "scriptPreprocessor": "<rootDir>/jest-preprocessor.js",
+  "unmockedModulePathPatterns": [
+    "<rootDir>/node_modules/react",
+    "<rootDir>/node_modules/react-dom",
+    "<rootDir>/node_modules/react-addons-test-utils"
+  ]
+}

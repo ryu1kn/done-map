@@ -5,6 +5,7 @@ end
 
 task :test do
   sh 'rspec spec'
+  sh '(cd frontend && npm test)'
 end
 
 task :lint do
