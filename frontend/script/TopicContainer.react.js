@@ -1,6 +1,6 @@
 
 import React from 'react';
-import TopicItem from './TopicItem.react';  // eslint-disable-line no-unused-vars
+import TopicItem from './TopicItem.react';
 
 const TopicContainer = React.createClass({
   render: function () {

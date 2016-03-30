@@ -1,6 +1,6 @@
 
 import React from 'react';
-import DoneMap from './DoneMap.react';  // eslint-disable-line no-unused-vars
+import DoneMap from './DoneMap.react';
 
 const TopicItem = React.createClass({
   convertToPercent: function (num) {

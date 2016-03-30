@@ -1,8 +1,8 @@
 
 import $ from 'jquery';
 import React from 'react';
-import TopicContainer from './TopicContainer.react';  // eslint-disable-line no-unused-vars
-import BandForm from './BandForm.react';  // eslint-disable-line no-unused-vars
+import TopicContainer from './TopicContainer.react';
+import BandForm from './BandForm.react';
 
 const DoneMapApp = React.createClass({
   _loadTopics: function () {
