@@ -1,7 +1,9 @@
 
 require 'aws-sdk'
 require 'securerandom'
+require 'time'
 require_relative 'uuid_generator'
+require_relative 'timestamp_generator'
 require_relative 'topic_data_converter'
 require_relative 'topic_repository'
 
@@ -19,14 +21,17 @@ class Context
       dynamodb_client: dynamodb_client,
       table_name: 'done-map-topics',
       uuid_generator: uuid_generator,
+      timestamp_generator: timestamp_generator,
       topic_data_converter: topic_data_converter
     )
   end
 
+  def timestamp_generator
+    TimestampGenerator.new(datetime_class: DateTime)
+  end
+
   def uuid_generator
-    UuidGenerator.new(
-      secure_random: SecureRandom
-    )
+    UuidGenerator.new(secure_random: SecureRandom)
   end
 
   def topic_data_converter

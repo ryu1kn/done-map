@@ -2,7 +2,7 @@
 require 'topic_repository'
 require 'topic_data_converter'
 
-describe 'topic_repository' do
+describe 'TopicRepository' do
   it 'can provide the information of all topics' do
     topic1 = {
       'id' => 'TOPIC_ID_1',
@@ -71,25 +71,35 @@ describe 'topic_repository' do
     )
   end
 
-  it 'registers one or more bands to a specified topic' do
+  it 'registers one or more bands to a specified topic with timestamp' do
     dynamodb_mock = spy('DynamoDB client')
+    timestamp_generator = double(
+      'TimestampGenerator',
+      generate: '2016-03-31T21:37:18+11:00'
+    )
 
     topic_repository = TopicRepository.new(
       dynamodb_client: dynamodb_mock,
       table_name: 'DONE-MAP-TOPICS',
       uuid_generator: nil,
+      timestamp_generator: timestamp_generator,
       topic_data_converter: nil
     )
+
     topic_id = 'TOPIC_ID'
     bands = [{ begin: 10, end: 20 }]
     topic_repository.save_bands(topic_id, bands)
     expect(dynamodb_mock).to have_received(:update_item).with(
       table_name: 'DONE-MAP-TOPICS',
       key: { id: 'TOPIC_ID' },
-      update_expression: 'SET bands = '\
+      update_expression: 'SET bands = ' \
         'list_append(if_not_exists(bands, :empty_list), :new_bands)',
       expression_attribute_values: {
-        ':new_bands' => [{ begin: 10, end: 20 }],
+        ':new_bands' => [{
+          begin: 10,
+          end: 20,
+          timestamp: '2016-03-31T21:37:18+11:00'
+        }],
         ':empty_list' => []
       }
     )

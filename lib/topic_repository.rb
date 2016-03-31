@@ -3,6 +3,7 @@ class TopicRepository
   def initialize(params)
     @dynamodb_client = params[:dynamodb_client]
     @table_name = params[:table_name]
+    @timestamp_generator = params[:timestamp_generator]
     @uuid_generator = params[:uuid_generator]
     @topic_data_converter = params[:topic_data_converter]
   end
@@ -22,7 +23,7 @@ class TopicRepository
       update_expression: 'SET bands = ' \
         'list_append(if_not_exists(bands, :empty_list), :new_bands)',
       expression_attribute_values: {
-        ':new_bands' => bands,
+        ':new_bands' => add_timestamp(bands),
         ':empty_list' => []
       }
     )
@@ -32,6 +33,15 @@ class TopicRepository
     topics = @dynamodb_client.scan(table_name: @table_name).items
     topics.map do |topic|
       @topic_data_converter.convert(topic)
+    end
+  end
+
+  private
+
+  def add_timestamp(bands)
+    timestamp = @timestamp_generator.generate
+    bands.map do |band|
+      band.merge timestamp: timestamp
     end
   end
 end
