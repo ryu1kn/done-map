@@ -26,7 +26,7 @@ const TopicItem = React.createClass({
         <div className="topic__index">{index}.</div>
         <div className="topic__title">{topic.title || ''}</div>
         <DoneMap total={topic.total} bands={topic.bands} />
-        <div className="topic__progress-stat">{this.getProgressPercent(topic)}</div>
+        <div className="topic__progress-stat">{this.getProgressPercent(topic)}%</div>
       </div>
     );
   }
