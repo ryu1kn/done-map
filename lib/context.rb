@@ -9,7 +9,7 @@ require_relative 'topic_repository'
 
 class Context
   def dynamodb_client
-    Aws::DynamoDB::Client.new(
+    @dynamodb_client ||= Aws::DynamoDB::Client.new(
       region: ENV['AWS_REGION'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID'],
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
@@ -17,7 +17,7 @@ class Context
   end
 
   def topic_repository
-    TopicRepository.new(
+    @topic_repository ||= TopicRepository.new(
       dynamodb_client: dynamodb_client,
       table_name: 'done-map-topics',
       uuid_generator: uuid_generator,
@@ -27,14 +27,14 @@ class Context
   end
 
   def timestamp_generator
-    TimestampGenerator.new(datetime_class: DateTime)
+    @timestamp_generator ||= TimestampGenerator.new(datetime_class: DateTime)
   end
 
   def uuid_generator
-    UuidGenerator.new(secure_random: SecureRandom)
+    @uuid_generator ||= UuidGenerator.new(secure_random: SecureRandom)
   end
 
   def topic_data_converter
-    TopicDataConverter.new
+    @topic_data_converter ||= TopicDataConverter.new
   end
 end
