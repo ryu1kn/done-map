@@ -1,9 +1,7 @@
-// TODO: Refactoring
-import $ from 'jquery';
+
 import React from 'react';
 
 const BandForm = React.createClass({
-  // TODO: Move this to Action
   handleSubmit: function (e) {
     e.preventDefault();
 
@@ -13,26 +11,8 @@ const BandForm = React.createClass({
 
     if (!this.validateFormData(index, begin, end)) {
       return;
-    } else {
-      var onSuccess = function () { location.reload(); };
-      this.postBand(index, begin, end, onSuccess);
     }
-  },
-
-  postBand: function (index, begin, end, successCallback) {
-    $.ajax({
-      url: '/topic/' + this.props.topics[index - 1].id + '/bands',
-      type: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      contentType: 'application/json',
-      data: JSON.stringify([{
-        begin: begin,
-        end: end
-      }])
-    })
-    .done(successCallback);
+    this.props.postBand(index - 1, begin, end);
   },
 
   validateFormData: function (index, begin, end) {
