@@ -5,9 +5,9 @@ const BandForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
 
-    var index = parseInt(this.refs.topicIndex.getDOMNode().value.trim());
-    var begin = parseInt(this.refs.bandBegin.getDOMNode().value.trim());
-    var end = parseInt(this.refs.bandEnd.getDOMNode().value.trim());
+    var index = parseInt(this.refs.topicIndex.value.trim());
+    var begin = parseInt(this.refs.bandBegin.value.trim());
+    var end = parseInt(this.refs.bandEnd.value.trim());
 
     if (!this.validateFormData(index, begin, end)) {
       return;
@@ -32,7 +32,5 @@ const BandForm = React.createClass({
     );
   }
 });
-
-
 
 module.exports = BandForm;
