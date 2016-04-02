@@ -1,10 +1,10 @@
 
-jest.unmock('../script/TopicContainer.react');
+jest.unmock('../../script/component/TopicContainer.react');
 
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import TopicContainer from '../script/TopicContainer.react';
-import TopicItem from '../script/TopicItem.react';
+import TopicContainer from '../../script/component/TopicContainer.react';
+import TopicItem from '../../script/component/TopicItem.react';
 
 describe('TopicContainer', () => {
 
