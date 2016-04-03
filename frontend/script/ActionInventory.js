@@ -1,37 +1,31 @@
 
 export default class ActionInventory {
-  constructor({$, store}) {
+  constructor({store, fetchFn}) {
     this._store = store;
-    this._$ = $;
+    this._fetchFn = fetchFn.bind(window);
   }
 
   loadTopics() {
     this._store.dispatch({
       type: 'FETCH_TOPICS_INITIATED'
     });
-    this._$.get('/topics', topics => {
+    return this._fetchFn('/topics').then(response => {
+      return response.json();
+    }).then(responseBody => {
       this._store.dispatch({
         type: 'FETCH_TOPICS_RECEIVED',
-        topics
+        topics: responseBody
       });
     });
   }
 
   postBand(topicId, begin, end) {
-    return new Promise(resolve => {
-      this._$.ajax({
-        url: '/topic/' + topicId + '/bands',
-        type: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        contentType: 'application/json',
-        data: JSON.stringify([{
-          begin: begin,
-          end: end
-        }])
-      })
-      .done(resolve);
+    return this._fetchFn(`/topic/${topicId}/bands`, {
+      method: 'POST',
+      body: JSON.stringify([{
+        begin: begin,
+        end: end
+      }])
     });
   }
 }

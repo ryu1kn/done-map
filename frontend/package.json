@@ -16,6 +16,7 @@
     "babel-preset-jest": "^9.0.3",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "deep-freeze": "0.0.1",
     "es6-promise": "^3.1.2",
     "eslint": "^2.5.1",
     "eslint-plugin-react": "^4.2.3",
@@ -25,8 +26,7 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
-    "deep-freeze": "0.0.1",
-    "jquery": "^2.2.2",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^0.14.8",
     "react-dom": "^0.14.7",
     "redux": "^3.3.1"

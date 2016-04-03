@@ -8,49 +8,55 @@ describe('ActionInventory', () => {
 
   describe('loadTopics', () => {
 
-    it('loads topics from server and dispatch relevant events to store', () => {
+    pit('loads topics from server and dispatch relevant events to store', () => {
       const store = {
         dispatch: jest.fn()
       };
-      const $ = {
-        get: jest.fn((url, callback) => callback(['TOPIC_1']))
-      };
+      const fetchFn = jest.fn(function () {
+        if (this !== window) {
+          return Promise.reject(new Error('fetch must be executed on window context'));
+        }
+        var response = {
+          json: () => Promise.resolve(['TOPIC_1'])
+        };
+        return Promise.resolve(response);
+      });
 
-      const inventory = new ActionInventory({store, $});
-      inventory.loadTopics();
-
-      expect(store.dispatch.mock.calls).toEqual([
-        [{
-          type: 'FETCH_TOPICS_INITIATED'
-        }],
-        [{
-          type: 'FETCH_TOPICS_RECEIVED',
-          topics: ['TOPIC_1']
-        }]
-      ]);
+      const inventory = new ActionInventory({store, fetchFn});
+      return inventory.loadTopics().then(() => {
+        expect(store.dispatch.mock.calls).toEqual([
+          [{
+            type: 'FETCH_TOPICS_INITIATED'
+          }],
+          [{
+            type: 'FETCH_TOPICS_RECEIVED',
+            topics: ['TOPIC_1']
+          }]
+        ]);
+      });
     });
 
   });
 
   describe('postBand', () => {
 
-    it('posts a band data to server and dispatch relevant events to store', () => {
-      const $ = {
-        ajax: jest.fn(() => ({done: (callback) => callback()}))
-      };
+    pit('posts a band data to server and dispatch relevant events to store', () => {
+      const fetchFn = jest.fn(function () {
+        return this !== window ?
+          Promise.reject(new Error('fetch must be executed on window context')) :
+          Promise.resolve();
+      });
       const [topicId, begin, end] = ['TOPIC_ID', 10, 30];
 
-      const inventory = new ActionInventory({$});
-      inventory.postBand(topicId, begin, end).then(() => {
-        expect($.ajax.mock.calls).toEqual([[{
-          url: '/topic/TOPIC_ID/bands',
-          type: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          contentType: 'application/json',
-          data: '[{"begin":10,"end":30}]'
-        }]]);
+      const inventory = new ActionInventory({fetchFn});
+      return inventory.postBand(topicId, begin, end).then(() => {
+        expect(fetchFn.mock.calls).toEqual([[
+          '/topic/TOPIC_ID/bands',
+          {
+            method: 'POST',
+            body: '[{"begin":10,"end":30}]'
+          }
+        ]]);
       });
     });
 
