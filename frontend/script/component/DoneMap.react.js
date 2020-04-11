@@ -18,7 +18,7 @@ const DoneMap = React.createClass({
       <div className="topic__progress-bar">
         {bands.map(band =>
           <div className="topic__progress-band"
-               style={this.getStyleSpec(band, total)}></div>
+            style={this.getStyleSpec(band, total)}></div>
         )}
       </div>
     );
